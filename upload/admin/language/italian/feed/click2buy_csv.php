@@ -1,6 +1,6 @@
 <?php
 // Heading
-$_['heading_title']      = 'Idealo Feed (CSV)';
+$_['heading_title']      = 'Click2Buy Feed (CSV)';
 
 // Text   
 $_['text_feed']          = 'Datafeed prodotti';
@@ -62,4 +62,4 @@ $_['help_order_minimum_fee']     = 'es. 5.00';
 $_['help_order_minimum_comment'] = 'es. Sovrapprezzo di 5 € giá incluso nelle spese di spedizione per ordini di importo fino a 10 €';
 
 // Error
-$_['error_permission']	         = 'Avviso: non possiedi le credenziali per modificare il datafeed Idealo (CSV)!';
+$_['error_permission']	         = 'Avviso: non possiedi le credenziali per modificare il datafeed Click2Buy (CSV)!';

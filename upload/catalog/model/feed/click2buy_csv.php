@@ -1,5 +1,5 @@
 <?php
-class ModelFeedIdealoCSV extends Model {
+class ModelFeedClick2BuyCSV extends Model {
 	public function getSetting($code, $store_id = 0) {
 		$data = array();
 
@@ -13,13 +13,14 @@ class ModelFeedIdealoCSV extends Model {
 			}
 		}
 		$data['error'] = 'Failed or not valid!';
+		$data['error_manufacturer'] = 'Error  manufacturer not set !';
 		return $data;
 	}
 
 	// public function getAllCategories($parent_id = 0, $depth = 0, $name = '', $path = '') {
 	// 	$category_data = array();
 	//
-	// 	$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "category c LEFT JOIN " . DB_PREFIX . "category_to_store c2s ON (c.category_id = c2s.category_id) LEFT JOIN " . DB_PREFIX . "category_description cd ON (c.category_id = cd.category_id) WHERE c.parent_id = '" . (int)$parent_id . "' AND cd.language_id = '" . (int)$this->config->get('idealo_csv_language_id') . "'");
+	// 	$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "category c LEFT JOIN " . DB_PREFIX . "category_to_store c2s ON (c.category_id = c2s.category_id) LEFT JOIN " . DB_PREFIX . "category_description cd ON (c.category_id = cd.category_id) WHERE c.parent_id = '" . (int)$parent_id . "' AND cd.language_id = '" . (int)$this->config->get('click2buy_csv_language_id') . "'");
 	// 	$depth++;
 	//
 	// 	foreach ($query->rows as $result) {
@@ -46,7 +47,7 @@ class ModelFeedIdealoCSV extends Model {
 			$customer_group_id = $this->config->get('config_customer_group_id');
 		}
 
-		$query = $this->db->query("SELECT DISTINCT *, pd.name AS name, p.image, m.name AS manufacturer, (SELECT price FROM " . DB_PREFIX . "product_discount pd2 WHERE pd2.product_id = p.product_id AND pd2.customer_group_id = '" . (int)$customer_group_id . "' AND pd2.quantity = '1' AND ((pd2.date_start = '0000-00-00' OR pd2.date_start < NOW()) AND (pd2.date_end = '0000-00-00' OR pd2.date_end > NOW())) ORDER BY pd2.priority ASC, pd2.price ASC LIMIT 1) AS discount, (SELECT price FROM " . DB_PREFIX . "product_special ps WHERE ps.product_id = p.product_id AND ps.customer_group_id = '" . (int)$customer_group_id . "' AND ((ps.date_start = '0000-00-00' OR ps.date_start < NOW()) AND (ps.date_end = '0000-00-00' OR ps.date_end > NOW())) ORDER BY ps.priority ASC, ps.price ASC LIMIT 1) AS special, (SELECT ss.name FROM " . DB_PREFIX . "stock_status ss WHERE ss.stock_status_id = p.stock_status_id AND ss.language_id = '" . (int)$this->config->get('idealo_csv_language_id') . "') AS stock_status, p.sort_order FROM " . DB_PREFIX . "product p LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id) LEFT JOIN " . DB_PREFIX . "product_to_store p2s ON (p.product_id = p2s.product_id) LEFT JOIN " . DB_PREFIX . "manufacturer m ON (p.manufacturer_id = m.manufacturer_id) WHERE p.product_id = '" . (int)$product_id . "' AND pd.language_id = '" . (int)$this->config->get('idealo_csv_language_id') . "' AND p.status = '1' AND p.date_available <= NOW() AND p2s.store_id = '" . (int)$this->config->get('config_store_id') . "'");
+		$query = $this->db->query("SELECT DISTINCT *, pd.name AS name, p.image, m.name AS manufacturer, (SELECT price FROM " . DB_PREFIX . "product_discount pd2 WHERE pd2.product_id = p.product_id AND pd2.customer_group_id = '" . (int)$customer_group_id . "' AND pd2.quantity = '1' AND ((pd2.date_start = '0000-00-00' OR pd2.date_start < NOW()) AND (pd2.date_end = '0000-00-00' OR pd2.date_end > NOW())) ORDER BY pd2.priority ASC, pd2.price ASC LIMIT 1) AS discount, (SELECT price FROM " . DB_PREFIX . "product_special ps WHERE ps.product_id = p.product_id AND ps.customer_group_id = '" . (int)$customer_group_id . "' AND ((ps.date_start = '0000-00-00' OR ps.date_start < NOW()) AND (ps.date_end = '0000-00-00' OR ps.date_end > NOW())) ORDER BY ps.priority ASC, ps.price ASC LIMIT 1) AS special, (SELECT ss.name FROM " . DB_PREFIX . "stock_status ss WHERE ss.stock_status_id = p.stock_status_id AND ss.language_id = '" . (int)$this->config->get('click2buy_csv_language_id') . "') AS stock_status, p.sort_order FROM " . DB_PREFIX . "product p LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id) LEFT JOIN " . DB_PREFIX . "product_to_store p2s ON (p.product_id = p2s.product_id) LEFT JOIN " . DB_PREFIX . "manufacturer m ON (p.manufacturer_id = m.manufacturer_id) WHERE p.product_id = '" . (int)$product_id . "' AND pd.language_id = '" . (int)$this->config->get('click2buy_csv_language_id') . "' AND p.status = '1' AND p.date_available <= NOW() AND p2s.store_id = '" . (int)$this->config->get('config_store_id') . "'");
 
 		if ($query->num_rows) {
 			return array(
@@ -54,8 +55,8 @@ class ModelFeedIdealoCSV extends Model {
 				'name'             => $query->row['name'],
 				'description'      => $query->row['description'],
 				'model'            => $query->row['model'],
-				'sku'              => $query->row['sku'],
-				'upc'              => $query->row['upc'],
+				//'sku'              => $query->row['sku'],
+				//'upc'              => $query->row['upc'],
 				'ean'              => $query->row['ean'],
 				// 'jan'              => $query->row['jan'],
 				// 'isbn'             => $query->row['isbn'],
@@ -66,13 +67,13 @@ class ModelFeedIdealoCSV extends Model {
 				'manufacturer_id'  => $query->row['manufacturer_id'],
 				'manufacturer'     => $query->row['manufacturer'],
 				'price'            => ($query->row['discount'] ? $query->row['discount'] : $query->row['price']),
-				'special'          => $query->row['special'],
+				//'special'          => $query->row['special'],
 				'points'           => $query->row['points'],
-				'tax_class_id'     => $query->row['tax_class_id'],
-				'date_available'   => $query->row['date_available'],
-				'minimum'          => $query->row['minimum'],
-				'weight'           => $query->row['weight'],
-				'weight_class_id'  => $query->row['weight_class_id'],
+				// 'tax_class_id'     => $query->row['tax_class_id'],
+				// 'date_available'   => $query->row['date_available'],
+				// 'minimum'          => $query->row['minimum'],
+				 'weight'           => $query->row['weight'],
+				 'weight_class_id'  => $query->row['weight_class_id'],
 				// 'sort_order'       => $query->row['sort_order'],
 				// 'date_added'       => $query->row['date_added'],
 				'date_modified'    => $query->row['date_modified'],
@@ -84,6 +85,14 @@ class ModelFeedIdealoCSV extends Model {
 	}
 
 	public function getProducts($data = array()) {
+
+		if ($this->config->get('click2buy_csv_manufacturer')) {
+
+		// if (!isset($this->config->get('click2buy_csv_manufacturer'))) {
+		// 	echo 303;
+		// 		die($data['error_manufacturer']);
+		// }
+
 		if ($this->customer->isLogged()) {
 			$customer_group_id = $this->customer->getCustomerGroupId();
 		} else {
@@ -96,7 +105,7 @@ class ModelFeedIdealoCSV extends Model {
 
 			$sql .= " WHERE p.status = '1' AND p.date_available <= NOW() AND p2s.store_id = '" . (int)$this->config->get('config_store_id') . "'";
 
-			$sql .= " AND p.manufacturer_id = 23 AND p.ean != ''";
+			$sql .= " AND p.manufacturer_id = ".(int)$this->config->get('click2buy_csv_manufacturer')." AND p.ean != ''";
 
 			$product_data = array();
 
@@ -108,7 +117,13 @@ class ModelFeedIdealoCSV extends Model {
 		}
 
 		return $product_data;
+	}else{
+
+		die($this->getSetting('click2buy_csv')['error_manufacturer']);
+
 	}
+
+}
 	public function getCategories($product_id) {
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_to_category WHERE product_id = '" . (int)$product_id . "'");
 

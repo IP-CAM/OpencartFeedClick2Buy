@@ -1,12 +1,12 @@
 <?php
 // Heading
-$_['heading_title']      = 'idealo Exportdatei (CSV)';
+$_['heading_title']      = 'click2buy Exportdatei (CSV)';
 
 // Text
 $_['text_feed']          = 'Exportdateien';
-$_['text_success']       = 'Ihre idealo Exportdatei (CSV) wurde erfolgreich aktualisiert!';
+$_['text_success']       = 'Ihre click2buy Exportdatei (CSV) wurde erfolgreich aktualisiert!';
 $_['text_list']          = 'Layout Liste';
-$_['text_edit']          = 'idealo Exportdatei bearbeiten';
+$_['text_edit']          = 'click2buy Exportdatei bearbeiten';
 $_['text_select_all']    = 'Alles auswählen';
 $_['text_unselect_all']  = 'Auswahl aufheben';
 
@@ -62,4 +62,4 @@ $_['help_order_minimum_fee']     = 'z.B. 5.00';
 $_['help_order_minimum_comment'] = 'z.B. Mindermengenzuschlag von 5,- € bereits in den Versandkosten enthalten. Entfällt ab 10,- €!';
 
 // Error
-$_['error_permission']           = 'Warnung: Sie haben keine Berechtigung, um idealo Exportdatei (CSV) zu ändern!';
+$_['error_permission']           = 'Warnung: Sie haben keine Berechtigung, um click2buy Exportdatei (CSV) zu ändern!';

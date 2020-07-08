@@ -1,5 +1,5 @@
 
-Opencart Feed extension - Idealo CSV
+Opencart Feed extension - Click2Buy CSV
 ====================================================================
 Date      : 16. January 2016
 Author    : Peter Maier
@@ -11,9 +11,9 @@ Official site : http://opencart.center
 Shop:           http://shop.opencart.center
 
 
-This extension allows you to export the items from an OpenCart shop, to be listed on idealo’s websites.
-idealo is a product and price comparison service. 
-(business.idealo.com www.idealo.de, www.idealo.at, www.idealo.fr, www.idealo.es, www.idealo.it, www.idealo.pl, www.idealo.in, www.idealo.co.uk)
+This extension allows you to export the items from an OpenCart shop, to be listed on click2buy’s websites.
+click2buy is a product and price comparison service. 
+(business.click2buy.com www.click2buy.de, www.click2buy.at, www.click2buy.fr, www.click2buy.es, www.click2buy.it, www.click2buy.pl, www.click2buy.in, www.click2buy.co.uk)
 
 
 FEATURES
@@ -35,10 +35,10 @@ INSTALLATION
         then 
         Go to the Admin area and login
         Open System - Users - User groups
-        Choose the required group(s) and give them the rights for feed/idealo_csv
+        Choose the required group(s) and give them the rights for feed/click2buy_csv
         Go to Extentions - Product feeds
-        Install idealo CSV
-        Edit idealo CSV and save your settings.
+        Install click2buy CSV
+        Edit click2buy CSV and save your settings.
         
         
 DISCLAIMER

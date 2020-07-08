@@ -1,12 +1,12 @@
 <?php
 // Heading
-$_['heading_title']      = 'Fichier idealo (CSV)';
+$_['heading_title']      = 'Fichier click2buy (CSV)';
 
 // Text   
 $_['text_feed']          = 'Fichiers produits';
-$_['text_success']       = 'La modification du fichier idealo a été effectuée avec succès(CSV)!';
+$_['text_success']       = 'La modification du fichier click2buy a été effectuée avec succès(CSV)!';
 $_['text_list']          = 'Liste mise en page';
-$_['text_edit']          = 'Modifier le fichier idealo';
+$_['text_edit']          = 'Modifier le fichier click2buy';
 $_['text_select_all']    = 'Tout sélectionner';
 $_['text_unselect_all']  = 'Tout déselectionner';
 
@@ -62,4 +62,4 @@ $_['help_order_minimum_fee']     = 'ex. 5.00';
 $_['help_order_minimum_comment'] = 'ex. Supplément pour petite quantité de 5,- € déjà inclus dans les frais de port. Aucun supplément à partir de 10,- €!';
 
 // Error
-$_['error_permission']	         = 'Attention: Vous n\'\'avez pas la permission de modifier le fichier idealo (CSV)!';
+$_['error_permission']	         = 'Attention: Vous n\'\'avez pas la permission de modifier le fichier click2buy (CSV)!';

@@ -1,12 +1,12 @@
 <?php
 // Heading
-$_['heading_title']      = 'plik idealo (CSV)';
+$_['heading_title']      = 'plik click2buy (CSV)';
 
 // Text
 $_['text_feed']          = 'Plik z ofertami produktów';
-$_['text_success']       = 'Gratulujemy, plik idealo (CSV) zaktualizował się prawidłowo!';
+$_['text_success']       = 'Gratulujemy, plik click2buy (CSV) zaktualizował się prawidłowo!';
 $_['text_list']          = 'Układ graficzny';
-$_['text_edit']          = 'Edytowanie pliku idealo';
+$_['text_edit']          = 'Edytowanie pliku click2buy';
 $_['text_select_all']    = 'Zaznacz wszystko';
 $_['text_unselect_all']  = 'Usuń zazaczone';
 
@@ -62,4 +62,4 @@ $_['help_order_minimum_fee']     = 'np.: 5.00';
 $_['help_order_minimum_comment'] = 'np.: Dopłata z powodu minimalnej kwoty zamówienia nie została osiągnięta.';
 
 // Error
-$_['error_permission']           = 'Ostrzeżenie: Nie posiadają Państwo uprawnień do zmiany pliku idealo (CSV)';
+$_['error_permission']           = 'Ostrzeżenie: Nie posiadają Państwo uprawnień do zmiany pliku click2buy (CSV)';

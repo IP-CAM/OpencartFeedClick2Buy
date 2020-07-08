@@ -1,5 +1,5 @@
 <?php
-class ModelFeedIdealoCSV extends Model {
+class ModelFeedClick2BuyCSV extends Model {
 
 	public function getLanguages() {
 		$query = $this->db->query("SELECT language_id, name FROM " . DB_PREFIX . "language");

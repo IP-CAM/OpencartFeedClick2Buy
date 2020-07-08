@@ -1,43 +1,30 @@
 	<?php
-    class ControllerFeedIdealoCSV extends Controller
+    class ControllerFeedClick2BuyCSV extends Controller
     {
-        // private function time_diff_conv($start, $s) {
-        // 	$t = array(
-        // 	    'd' => 86400,
-        // 	    'h' => 3600,
-        // 	    'm' => 60,
-        // 	);
-        // 	$string = '';
-        // 	$s = abs($s - $start);
-        // 	foreach($t as $key => &$val) {
-        // 	    $$key = floor($s/$val);
-        // 	    $s -= ($$key*$val);
-        // 	    $string .= ($$key==0) ? '' : $$key . "$key ";
-        // 	}
-        // 	return $string . $s. 's';
-        // }
 
         public function store()
         {
             set_time_limit(1800);
             $start_time = time();
 
-            if ($this->config->get('idealo_csv_status')) {
-                $this->load->model('feed/idealo_csv');
-                $data = $this->model_feed_idealo_csv->getSetting('idealo_csv');
+            if ($this->config->get('click2buy_csv_status')) {
+                $this->load->model('feed/click2buy_csv');
+                $data = $this->model_feed_click2buy_csv->getSetting('click2buy_csv');
 
-                $strstart   = $data['idealo_csv_data_feed_seperator'];
-                $strnext    = $data['idealo_csv_data_feed_seperator'] . $data['idealo_csv_data_feed_seperator_2'] . $data['idealo_csv_data_feed_seperator'];
+		if($data['click2buy_csv_manufacturer']){
+
+                $strstart   = $data['click2buy_csv_data_feed_seperator'];
+                $strnext    = $data['click2buy_csv_data_feed_seperator'] . $data['click2buy_csv_data_feed_seperator_2'] . $data['click2buy_csv_data_feed_seperator'];
                 $strnextinf = "$";
-                $strclose   = $data['idealo_csv_data_feed_seperator'];
+                $strclose   = $data['click2buy_csv_data_feed_seperator'];
                 $strnl      = "\n";
                 $output     = "";
 
-                if ($data['idealo_csv_language_id']) {
-                    $this->config->set('idealo_csv_language_id', $data['idealo_csv_language_id']);
+                if ($data['click2buy_csv_language_id']) {
+                    $this->config->set('click2buy_csv_language_id', $data['click2buy_csv_language_id']);
                 }
 
-                if (!isset($data['idealo_csv_status'])) {
+                if (!isset($data['click2buy_csv_status'])) {
                     die($data['error']);
                 }
 
@@ -54,10 +41,10 @@
 
                 $output .= $strstart;
 
-                $output .= $data['idealo_csv_store_id'] . $strnext;
+                $output .= $data['click2buy_csv_store_id'] . $strnext;
                 $output .= $this->config->get('config_name') . $strnext;
                 $output .= $this->config->get('config_address') . $strnext;
-                $output .= $data['idealo_csv_location_zip'] . $strnext;
+                $output .= $data['click2buy_csv_location_zip'] . $strnext;
                 $output .= $this->config->get('config_town') . $strnext;
                 $output .= 'IE' . $strnext;
                 $output .= $this->config->get('config_telephone') . $strnext;
@@ -67,6 +54,7 @@
                 $this->response->setOutput($output);
             }
         }
+			}
 
         public function index()
         {
@@ -75,34 +63,34 @@
 
             $i = 0;
             $setting = 0;
-            if ($this->config->get('idealo_csv_status')) {
-                $this->load->model('feed/idealo_csv');
-                $data = $this->model_feed_idealo_csv->getSetting('idealo_csv');
+            if ($this->config->get('click2buy_csv_status')) {
+                $this->load->model('feed/click2buy_csv');
+                $data = $this->model_feed_click2buy_csv->getSetting('click2buy_csv');
 
-                $strstart   = $data['idealo_csv_data_feed_seperator'];
-                $strnext    = $data['idealo_csv_data_feed_seperator'] . $data['idealo_csv_data_feed_seperator_2'] . $data['idealo_csv_data_feed_seperator'];
+                $strstart   = $data['click2buy_csv_data_feed_seperator'];
+                $strnext    = $data['click2buy_csv_data_feed_seperator'] . $data['click2buy_csv_data_feed_seperator_2'] . $data['click2buy_csv_data_feed_seperator'];
                 $strnextinf = "$";
-                $strclose   = $data['idealo_csv_data_feed_seperator'];
+                $strclose   = $data['click2buy_csv_data_feed_seperator'];
                 $strnl      = "\n";
                 $output     = "";
 
-                if ($data['idealo_csv_language_id']) {
-                    $this->config->set('idealo_csv_language_id', $data['idealo_csv_language_id']);
+                if ($data['click2buy_csv_language_id']) {
+                    $this->config->set('click2buy_csv_language_id', $data['click2buy_csv_language_id']);
                 }
 
-                if (!isset($data['idealo_csv_status'])) {
+                if (!isset($data['click2buy_csv_status'])) {
                     die($data['error']);
                 }
 
-                // if (isset($data['idealo_csv_product_category']) ) {
-                // 		$exclude_categories = $data['idealo_csv_product_category'];
+                // if (isset($data['click2buy_csv_product_category']) ) {
+                // 		$exclude_categories = $data['click2buy_csv_product_category'];
                 // } else {
                 // 		$exclude_categories = array();
                 // }
 
                 // $all_categories = array();
                 //
-                // foreach ($this->model_feed_idealo_csv->getAllCategories(0) as $category) {
+                // foreach ($this->model_feed_click2buy_csv->getAllCategories(0) as $category) {
                 // 	$all_categories[$category['category_id']] = $category;
                 // 	unset($all_categories[$category['category_id']]['category_id']);
                 // }
@@ -160,7 +148,7 @@
                 $output .= $strclose . $strnl;
 
                 $products = array();
-                $products = $this->model_feed_idealo_csv->getProducts();
+                $products = $this->model_feed_click2buy_csv->getProducts();
 
                 $total_products = count($products);
 
@@ -168,7 +156,7 @@
 
                         // $data['images'] = array();
                     //
-                    // $results = $this->model_feed_idealo_csv->getProductImages($product['product_id']);
+                    // $results = $this->model_feed_click2buy_csv->getProductImages($product['product_id']);
                     // $j = 0;
                     // $image = '';
 
@@ -178,7 +166,7 @@
                     // 	);
                     // }
 
-                    //$categories = $this->model_feed_idealo_csv->getCategories($product['product_id']);
+                    //$categories = $this->model_feed_click2buy_csv->getCategories($product['product_id']);
                     //$show = true;
                     //$deepest_cat_id = 0;
 
@@ -283,10 +271,10 @@
                         //     $product_price = 0;
                         //     $product_price = $this->currency->format($this->tax->calculate($product['price'], $product['tax_class_id']), $currency_code, $currency_value, false);
                         // 		        }
-                        // if ( ($product_price < $data['idealo_csv_order_minimum_sum']) &&  ($product_price > 0) ){
-                        // 	$output .= $data['idealo_csv_order_minimum_fee'] . $strnext;
-                        // 	$output .= $this->currency->format((abs($data['idealo_csv_order_minimum_sum'] - ($this->currency->format($this->tax->calculate(($product['minimum'] * $product_price), $product['tax_class_id']), $currency_code, $currency_value, false)))), $currency_code, $currency_value, false) . $strnext;
-                        // 	$output .= $data['idealo_csv_order_minimum_comment'] . $strnext;
+                        // if ( ($product_price < $data['click2buy_csv_order_minimum_sum']) &&  ($product_price > 0) ){
+                        // 	$output .= $data['click2buy_csv_order_minimum_fee'] . $strnext;
+                        // 	$output .= $this->currency->format((abs($data['click2buy_csv_order_minimum_sum'] - ($this->currency->format($this->tax->calculate(($product['minimum'] * $product_price), $product['tax_class_id']), $currency_code, $currency_value, false)))), $currency_code, $currency_value, false) . $strnext;
+                        // 	$output .= $data['click2buy_csv_order_minimum_comment'] . $strnext;
                         // } else {
                         // 	$output .= $strnext;
                         // 	$output .= $strnext;
@@ -300,15 +288,15 @@
                         // }else{
                         // 	$output .= $product['date_added'] . $strnext;
                         // }
-                        // $output .= $data['idealo_csv_location_zip'] . $strnext;
-                        // $output .= $data['idealo_csv_delivery_time'] . $strnext;
-                        // if ($data['idealo_csv_delivery_price_calc']) {
+                        // $output .= $data['click2buy_csv_location_zip'] . $strnext;
+                        // $output .= $data['click2buy_csv_delivery_time'] . $strnext;
+                        // if ($data['click2buy_csv_delivery_price_calc']) {
                         // 	$cost = 0;
                         // 	$price = 0;
                         // 	$rates = array();
                         //
                         // 	$price = $product_price;
-                        // 	$rates = explode(',', $data['idealo_csv_delivery_price_calc']);
+                        // 	$rates = explode(',', $data['click2buy_csv_delivery_price_calc']);
                         //
                         // 	foreach ($rates as $rate) {
                         // 		$datad = explode(':', $rate);
@@ -325,7 +313,7 @@
                         //   			        } else {
                         //   			          	$output .= $strnext;
                         // }
-                        // if ($data['idealo_csv_delivery_weight_calc']) {
+                        // if ($data['click2buy_csv_delivery_weight_calc']) {
                         // 	$cost = 0;
                         // 	$weight = 0;
                         // 	$rates = array();
@@ -334,7 +322,7 @@
                         // 	} else {
                         // 		$weight = $product['weight'];
                         // 	}
-                        // 	$rates = explode(',', $data['idealo_csv_delivery_weight_calc']);
+                        // 	$rates = explode(',', $data['click2buy_csv_delivery_weight_calc']);
                         //
                         // 	foreach ($rates as $rate) {
                         // 		$datac = explode(':', $rate);
@@ -351,17 +339,17 @@
                         //   			        } else {
                         //   			          	$output .= $strnext;
                         // }
-                        // $output .= $data['idealo_csv_payment_method'] . $strnext;
-                        // $output .= $data['idealo_csv_payment_method_2'] . $strnext;
-                        // $output .= $data['idealo_csv_payment_method_3'] . $strnext;
-                        // $output .= $data['idealo_csv_payment_methods'] . $strnext;
-                        // if ($data['idealo_csv_payment_max'] >= $product_price) {
-                        //  if ($data['idealo_csv_payment_free'] >= $product_price) {
+                        // $output .= $data['click2buy_csv_payment_method'] . $strnext;
+                        // $output .= $data['click2buy_csv_payment_method_2'] . $strnext;
+                        // $output .= $data['click2buy_csv_payment_method_3'] . $strnext;
+                        // $output .= $data['click2buy_csv_payment_methods'] . $strnext;
+                        // if ($data['click2buy_csv_payment_max'] >= $product_price) {
+                        //  if ($data['click2buy_csv_payment_free'] >= $product_price) {
                         //    $product_price_payment = '';
-                        //   if (substr($data['idealo_csv_payment_cost'], -1) == '%') {
-                        //      $product_price_payment = ($product_price * $data['idealo_csv_payment_cost']) / 100;
+                        //   if (substr($data['click2buy_csv_payment_cost'], -1) == '%') {
+                        //      $product_price_payment = ($product_price * $data['click2buy_csv_payment_cost']) / 100;
                         //   			           } else {
-                        //      $product_price_payment = $data['idealo_csv_payment_cost'];
+                        //      $product_price_payment = $data['click2buy_csv_payment_cost'];
                         //    }
                         //      				   //$output .= $product_price_payment . $strnext;
                         //      				   $output .= $this->currency->format($product_price_payment, $currency_code, $currency_value, false) . $strnext;
@@ -371,13 +359,13 @@
                         //   			        } else {
                         //   			           $output .= '' . $strnext;
                         // 		        }
-                        // if ($data['idealo_csv_payment_max_2'] >= $product_price) {
-                        //  if ($data['idealo_csv_payment_free_2'] >= $product_price) {
+                        // if ($data['click2buy_csv_payment_max_2'] >= $product_price) {
+                        //  if ($data['click2buy_csv_payment_free_2'] >= $product_price) {
                         //    $product_price_payment_2 = '';
-                        //   if (substr($data['idealo_csv_payment_cost_2'], -1) == '%') {
-                        //      $product_price_payment_2 = (($product_price * $data['idealo_csv_payment_cost_2']) / 100);
+                        //   if (substr($data['click2buy_csv_payment_cost_2'], -1) == '%') {
+                        //      $product_price_payment_2 = (($product_price * $data['click2buy_csv_payment_cost_2']) / 100);
                         //   			           } else {
-                        //      $product_price_payment_2 = $data['idealo_csv_payment_cost_2'];
+                        //      $product_price_payment_2 = $data['click2buy_csv_payment_cost_2'];
                         //    }
                         //      				   //$output .= $product_price_payment_2 . $strnext;
                         //      				   $output .= $this->currency->format($product_price_payment_2, $currency_code, $currency_value, false) . $strnext;
@@ -387,13 +375,13 @@
                         //   			        } else {
                         //   			           $output .= '' . $strnext;
                         // 		        }
-                        // if ($data['idealo_csv_payment_max_3'] >= $product_price) {
-                        //  if ($data['idealo_csv_payment_free_3'] >= $product_price) {
+                        // if ($data['click2buy_csv_payment_max_3'] >= $product_price) {
+                        //  if ($data['click2buy_csv_payment_free_3'] >= $product_price) {
                         //    $product_price_payment_3 = 0;
-                        //   if (substr($data['idealo_csv_payment_cost_3'], -1) == '%') {
-                        //      $product_price_payment_3 = ($product_price * $data['idealo_csv_payment_cost_3']) / 100;
+                        //   if (substr($data['click2buy_csv_payment_cost_3'], -1) == '%') {
+                        //      $product_price_payment_3 = ($product_price * $data['click2buy_csv_payment_cost_3']) / 100;
                         //   			           } else {
-                        //      $product_price_payment_3 = $data['idealo_csv_payment_cost_3'];
+                        //      $product_price_payment_3 = $data['click2buy_csv_payment_cost_3'];
                         //    }
                         //      				   //$output .= $product_price_payment_3 . $strnext;
                         //      				   $output .= $this->currency->format($product_price_payment_3, $currency_code, $currency_value, false) . $strnext;

@@ -1,12 +1,12 @@
 <?php
 // Heading
-$_['heading_title']      = 'archivo de exportación de idealo (CSV)';
+$_['heading_title']      = 'archivo de exportación de click2buy (CSV)';
 
 // Text
 $_['text_feed']          = 'Datos de exportación';
 $_['text_success']       = 'su archivo de exportación (CSV) ha sido actualizado corréctamente!';
 $_['text_list']          = 'lista Layout';
-$_['text_edit']          = 'editar el archivo de exportacion de idealo';
+$_['text_edit']          = 'editar el archivo de exportacion de click2buy';
 $_['text_select_all']    = 'seleccionar todo';
 $_['text_unselect_all']  = 'deshacer todo';
 

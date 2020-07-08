@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <modification>
-    <name>OpenCart Feed - Idealo (CSV)</name>
-    <code>1mmoc-feed-idealo-csv</code>
-    <version>2.5</version>
+    <name>OpenCart Feed - Click2Buy (CSV)</name>
+    <code>111mmoc-feed-click2buy-csv</code>
+    <version>1.0</version>
     <author>Keith Phelan</author>
     <link>http://vool.ie</link>
 </modification>
