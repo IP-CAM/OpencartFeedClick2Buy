@@ -1,7 +1,6 @@
 	<?php
     class ControllerFeedClick2BuyCSV extends Controller
     {
-
         public function store()
         {
             set_time_limit(1800);
@@ -11,50 +10,49 @@
                 $this->load->model('feed/click2buy_csv');
                 $data = $this->model_feed_click2buy_csv->getSetting('click2buy_csv');
 
-		if($data['click2buy_csv_manufacturer']){
+                if ($data['click2buy_csv_manufacturer']) {
+                    $strstart   = $data['click2buy_csv_data_feed_seperator'];
+                    $strnext    = $data['click2buy_csv_data_feed_seperator'] . $data['click2buy_csv_data_feed_seperator_2'] . $data['click2buy_csv_data_feed_seperator'];
+                    $strnextinf = "$";
+                    $strclose   = $data['click2buy_csv_data_feed_seperator'];
+                    $strnl      = "\n";
+                    $output     = "";
 
-                $strstart   = $data['click2buy_csv_data_feed_seperator'];
-                $strnext    = $data['click2buy_csv_data_feed_seperator'] . $data['click2buy_csv_data_feed_seperator_2'] . $data['click2buy_csv_data_feed_seperator'];
-                $strnextinf = "$";
-                $strclose   = $data['click2buy_csv_data_feed_seperator'];
-                $strnl      = "\n";
-                $output     = "";
+                    if ($data['click2buy_csv_language_id']) {
+                        $this->config->set('click2buy_csv_language_id', $data['click2buy_csv_language_id']);
+                    }
 
-                if ($data['click2buy_csv_language_id']) {
-                    $this->config->set('click2buy_csv_language_id', $data['click2buy_csv_language_id']);
+                    if (!isset($data['click2buy_csv_status'])) {
+                        die($data['error']);
+                    }
+
+                    $output .= $strstart;
+
+                    $output .= 'outlet_id' . $strnext;
+                    $output .= 'outlet_name' . $strnext;
+                    $output .= 'address' . $strnext;
+                    $output .= 'zip_code' . $strnext;
+                    $output .= 'town' . $strnext;
+                    $output .= 'country_code' . $strnext;
+                    $output .= 'phone' . $strnext;
+                    $output .= $strclose . $strnl;
+
+                    $output .= $strstart;
+
+                    $output .= $data['click2buy_csv_store_id'] . $strnext;
+                    $output .= $this->config->get('config_name') . $strnext;
+                    $output .= $this->config->get('config_address') . $strnext;
+                    $output .= $data['click2buy_csv_location_zip'] . $strnext;
+                    $output .= $this->config->get('config_town') . $strnext;
+                    $output .= 'IE' . $strnext;
+                    $output .= $this->config->get('config_telephone') . $strnext;
+                    $output .= $strclose . $strnl;
+
+                    $this->response->addHeader('Content-Type: text/plain; charset=utf-8');
+                    $this->response->setOutput($output);
                 }
-
-                if (!isset($data['click2buy_csv_status'])) {
-                    die($data['error']);
-                }
-
-                $output .= $strstart;
-
-                $output .= 'outlet_id' . $strnext;
-                $output .= 'outlet_name' . $strnext;
-                $output .= 'address' . $strnext;
-                $output .= 'zip_code' . $strnext;
-                $output .= 'town' . $strnext;
-                $output .= 'country_code' . $strnext;
-                $output .= 'phone' . $strnext;
-                $output .= $strclose . $strnl;
-
-                $output .= $strstart;
-
-                $output .= $data['click2buy_csv_store_id'] . $strnext;
-                $output .= $this->config->get('config_name') . $strnext;
-                $output .= $this->config->get('config_address') . $strnext;
-                $output .= $data['click2buy_csv_location_zip'] . $strnext;
-                $output .= $this->config->get('config_town') . $strnext;
-                $output .= 'IE' . $strnext;
-                $output .= $this->config->get('config_telephone') . $strnext;
-                $output .= $strclose . $strnl;
-
-                $this->response->addHeader('Content-Type: text/plain; charset=utf-8');
-                $this->response->setOutput($output);
             }
         }
-			}
 
         public function index()
         {
@@ -82,21 +80,6 @@
                     die($data['error']);
                 }
 
-                // if (isset($data['click2buy_csv_product_category']) ) {
-                // 		$exclude_categories = $data['click2buy_csv_product_category'];
-                // } else {
-                // 		$exclude_categories = array();
-                // }
-
-                // $all_categories = array();
-                //
-                // foreach ($this->model_feed_click2buy_csv->getAllCategories(0) as $category) {
-                // 	$all_categories[$category['category_id']] = $category;
-                // 	unset($all_categories[$category['category_id']]['category_id']);
-                // }
-
-                // $this->load->model('catalog/category');
-
                 $this->load->model('catalog/product');
 
                 $this->load->language('product/product');
@@ -120,31 +103,6 @@
                 $output .= 'quantity' . $strnext;
                 $output .= 'availability' . $strnext;
                 $output .= 'updated' . $strnext;
-                //$output .= 'Category' . $strnext;
-                // $output .= 'SKU' . $strnext;
-                // $output .= 'UPC' . $strnext;
-                // $output .= 'ISBN' . $strnext;
-                // $output .= 'JAN' . $strnext;
-                // $output .= 'MPN' . $strnext;
-                //$output .= 'Minimum' . $strnext;
-                // $output .= 'Surcharge min. order value' . $strnext;
-                // $output .= 'Price dif. to min. order value' . $strnext;
-                // $output .= 'Comment Surcharge for min. order value' . $strnext;
-                //$output .= 'Date available' . $strnext;
-                //$output .= 'Date added' . $strnext;
-                //$output .= 'Location zip' . $strnext;
-                // $output .= 'Shipping time' . $strnext;
-                // $output .= 'Shipping charge by price' . $strnext;
-                // $output .= 'Shipping charge by weight' . $strnext;
-                // $output .= 'Payment method 1' . $strnext;
-                // $output .= 'Payment method 2' . $strnext;
-                // $output .= 'Payment method 3' . $strnext;
-                // $output .= 'Additional Payment methods' . $strnext;
-                // $output .= 'Payment fee method 1' . $strnext;
-                // $output .= 'Payment fee method 2' . $strnext;
-                // $output .= 'Payment fee method 3' . $strnext;
-                //$output .= 'image' . $strnext;
-                //$output .= 'Additional image links' . $strnext;
                 $output .= $strclose . $strnl;
 
                 $products = array();
@@ -153,70 +111,16 @@
                 $total_products = count($products);
 
                 foreach ($products as $product) {
-
-                        // $data['images'] = array();
-                    //
-                    // $results = $this->model_feed_click2buy_csv->getProductImages($product['product_id']);
-                    // $j = 0;
-                    // $image = '';
-
-                    // foreach ($results as $result) {
-                    // 	$data['images'][] = array(
-                    // 		'popup' => $this->model_tool_image->resize($result['image'], $this->config->get('config_image_popup_width'), $this->config->get('config_image_popup_height')),
-                    // 	);
-                    // }
-
-                    //$categories = $this->model_feed_click2buy_csv->getCategories($product['product_id']);
-                    //$show = true;
-                    //$deepest_cat_id = 0;
-
-                    // foreach ($categories as $category) {
-                    // 	if (in_array($category['category_id'], $exclude_categories)) {
-                    // 		$show = false;
-                    // 		break;
-                    // 	}
-                    // 	if (!$deepest_cat_id) {
-                    // 		$deepest_cat_id = $category['category_id'];
-                    // 	} else {
-                    // 		if (isset($all_categories[$category['category_id']]['depth']) && ($all_categories[$category['category_id']]['depth'] > $all_categories[$deepest_cat_id]['depth'])) {
-                    // 			$deepest_cat_id = $category['category_id'];
-                    // 		}
-                    // 	}
-                    // }
-
-                    //if ($show) {
                     if ($product['description']) {
                         $i = ($i + 1);
 
                         $output .= $strstart;
-                        //$categories = $this->model_catalog_product->getCategories($product['product_id']);
 
-                        // foreach ($categories as $category) {
-                        // 	$path = $this->getPath($category['category_id']);
-                        //
-                        // 	if ($path) {
-                        // 		$string = '';
-                        //
-                        // 		foreach (explode('_', $path) as $path_id) {
-                        // 			$category_info = $this->model_catalog_category->getCategory($path_id);
-                        //
-                        // 			if ($category_info) {
-                        // 				if (!$string) {
-                        // 					$string = $category_info['name'];
-                        // 				} else {
-                        // 					$string .= ' &gt; ' . $category_info['name'];
-                        // 				}
-                        // 			}
-                        // 		}
-                        // 	}
-                        // }
-                        //$output .= $string . $strnext;
                         $output .= $product['product_id'] . $strnext;
                         $output .= $product['ean'] . $strnext;
                         $output .= html_entity_decode($product['name'], ENT_QUOTES, 'UTF-8') . $strnext;
 
                         // Price
-                        //$output .= $product['price'] . $strnext;
                         $output .= $this->currency->format($product['price'], '', '', false) . $strnext;
 
                         $currencies = array(
@@ -243,7 +147,8 @@
 
                         $output .= html_entity_decode($this->url->link('product/product', 'product_id=' . $product['product_id']), ENT_QUOTES, 'UTF-8') . $strnext;
                         //$output .= $product['description'] . $strnext;
-                        $output .= strip_tags(html_entity_decode($product['description'], ENT_QUOTES, 'UTF-8')) . $strnext;
+                        //$output .= strip_tags(html_entity_decode($product['description'], ENT_QUOTES, 'UTF-8')) . $strnext;
+                        $output .= trim(preg_replace('/\s+/', ' ', $product['description'])). $strnext;
                         $output .= html_entity_decode($product['manufacturer'], ENT_QUOTES, 'UTF-8') . $strnext;
 
                         $output .= $this->weight->format($product['weight'], $product['weight_class_id']) . $strnext;
@@ -253,186 +158,14 @@
                         //$output .= ($product['quantity'] ? $data['text_instock'] : $product['stock_status']) . $strnext;
                         $output .= ($product['quantity'] ? 1 : 0) . $strnext;
 
-
-                        // $output .= $product['sku'] . $strnext;
-                        // $output .= $product['upc'] . $strnext;
-
-                        // $output .= $product['isbn'] . $strnext;
-                        // $output .= $product['jan'] . $strnext;
-                        // $output .= $product['mpn'] . $strnext;
-                        // $output .= $product['minimum'] . $strnext;
-
-                        // if ((float)$product['special']) {
-                        //      				    $output .= $this->currency->format($this->tax->calculate(($product['minimum'] * $product['special']), $product['tax_class_id']), $currency_code, $currency_value, false) . $strnext;
-                        //     $product_price = 0;
-                        //     $product_price = $this->currency->format($this->tax->calculate($product['special'], $product['tax_class_id']), $currency_code, $currency_value, false);
-                        //   			        } else {
-                        //   			            $output .= $this->currency->format($this->tax->calculate(($product['minimum'] * $product['price']), $product['tax_class_id']), $currency_code, $currency_value, false) . $strnext;
-                        //     $product_price = 0;
-                        //     $product_price = $this->currency->format($this->tax->calculate($product['price'], $product['tax_class_id']), $currency_code, $currency_value, false);
-                        // 		        }
-                        // if ( ($product_price < $data['click2buy_csv_order_minimum_sum']) &&  ($product_price > 0) ){
-                        // 	$output .= $data['click2buy_csv_order_minimum_fee'] . $strnext;
-                        // 	$output .= $this->currency->format((abs($data['click2buy_csv_order_minimum_sum'] - ($this->currency->format($this->tax->calculate(($product['minimum'] * $product_price), $product['tax_class_id']), $currency_code, $currency_value, false)))), $currency_code, $currency_value, false) . $strnext;
-                        // 	$output .= $data['click2buy_csv_order_minimum_comment'] . $strnext;
-                        // } else {
-                        // 	$output .= $strnext;
-                        // 	$output .= $strnext;
-                        // 	$output .= $strnext;
-                        // }
-
-                        //$output .= $product['date_available'] . $strnext;
                         $output .= $product['date_modified'] . $strnext;
-                        // if($product['date_added'] == '0000-00-00 00:00:00'){
-                        // 	$output .= $product['date_modified'] . $strnext;
-                        // }else{
-                        // 	$output .= $product['date_added'] . $strnext;
-                        // }
-                        // $output .= $data['click2buy_csv_location_zip'] . $strnext;
-                        // $output .= $data['click2buy_csv_delivery_time'] . $strnext;
-                        // if ($data['click2buy_csv_delivery_price_calc']) {
-                        // 	$cost = 0;
-                        // 	$price = 0;
-                        // 	$rates = array();
-                        //
-                        // 	$price = $product_price;
-                        // 	$rates = explode(',', $data['click2buy_csv_delivery_price_calc']);
-                        //
-                        // 	foreach ($rates as $rate) {
-                        // 		$datad = explode(':', $rate);
-                        //
-                        // 		if ($datad[0] >= $price) {
-                        // 			if (isset($datad[1])) {
-                        // 				$cost = $datad[1];
-                        // 			}
-                        //
-                        // 			break;
-                        // 		}
-                        // 	}
-                        //   			           	$output .= $this->currency->format($cost, $currency_code, $currency_value, false) . $strnext;
-                        //   			        } else {
-                        //   			          	$output .= $strnext;
-                        // }
-                        // if ($data['click2buy_csv_delivery_weight_calc']) {
-                        // 	$cost = 0;
-                        // 	$weight = 0;
-                        // 	$rates = array();
-                        // 	if ($product['weight_class_id'] == '2') {
-                        // 		$weight = $product['weight'] / 1000 ;
-                        // 	} else {
-                        // 		$weight = $product['weight'];
-                        // 	}
-                        // 	$rates = explode(',', $data['click2buy_csv_delivery_weight_calc']);
-                        //
-                        // 	foreach ($rates as $rate) {
-                        // 		$datac = explode(':', $rate);
-                        //
-                        // 		if ($datac[0] >= $weight) {
-                        // 			if (isset($datac[1])) {
-                        // 				$cost = $datac[1];
-                        // 			}
-                        //
-                        // 			break;
-                        // 		}
-                        // 	}
-                        //   			           	$output .= $this->currency->format($cost, $currency_code, $currency_value, false) . $strnext;
-                        //   			        } else {
-                        //   			          	$output .= $strnext;
-                        // }
-                        // $output .= $data['click2buy_csv_payment_method'] . $strnext;
-                        // $output .= $data['click2buy_csv_payment_method_2'] . $strnext;
-                        // $output .= $data['click2buy_csv_payment_method_3'] . $strnext;
-                        // $output .= $data['click2buy_csv_payment_methods'] . $strnext;
-                        // if ($data['click2buy_csv_payment_max'] >= $product_price) {
-                        //  if ($data['click2buy_csv_payment_free'] >= $product_price) {
-                        //    $product_price_payment = '';
-                        //   if (substr($data['click2buy_csv_payment_cost'], -1) == '%') {
-                        //      $product_price_payment = ($product_price * $data['click2buy_csv_payment_cost']) / 100;
-                        //   			           } else {
-                        //      $product_price_payment = $data['click2buy_csv_payment_cost'];
-                        //    }
-                        //      				   //$output .= $product_price_payment . $strnext;
-                        //      				   $output .= $this->currency->format($product_price_payment, $currency_code, $currency_value, false) . $strnext;
-                        //   			         } else {
-                        //   			           $output .= '0.00' . $strnext;
-                        // 		         }
-                        //   			        } else {
-                        //   			           $output .= '' . $strnext;
-                        // 		        }
-                        // if ($data['click2buy_csv_payment_max_2'] >= $product_price) {
-                        //  if ($data['click2buy_csv_payment_free_2'] >= $product_price) {
-                        //    $product_price_payment_2 = '';
-                        //   if (substr($data['click2buy_csv_payment_cost_2'], -1) == '%') {
-                        //      $product_price_payment_2 = (($product_price * $data['click2buy_csv_payment_cost_2']) / 100);
-                        //   			           } else {
-                        //      $product_price_payment_2 = $data['click2buy_csv_payment_cost_2'];
-                        //    }
-                        //      				   //$output .= $product_price_payment_2 . $strnext;
-                        //      				   $output .= $this->currency->format($product_price_payment_2, $currency_code, $currency_value, false) . $strnext;
-                        //   			         } else {
-                        //   			           $output .= '0.00' . $strnext;
-                        // 		         }
-                        //   			        } else {
-                        //   			           $output .= '' . $strnext;
-                        // 		        }
-                        // if ($data['click2buy_csv_payment_max_3'] >= $product_price) {
-                        //  if ($data['click2buy_csv_payment_free_3'] >= $product_price) {
-                        //    $product_price_payment_3 = 0;
-                        //   if (substr($data['click2buy_csv_payment_cost_3'], -1) == '%') {
-                        //      $product_price_payment_3 = ($product_price * $data['click2buy_csv_payment_cost_3']) / 100;
-                        //   			           } else {
-                        //      $product_price_payment_3 = $data['click2buy_csv_payment_cost_3'];
-                        //    }
-                        //      				   //$output .= $product_price_payment_3 . $strnext;
-                        //      				   $output .= $this->currency->format($product_price_payment_3, $currency_code, $currency_value, false) . $strnext;
-                        //   			         } else {
-                        //   			           $output .= '0.00' . $strnext;
-                        // 		         }
-                        //   			        } else {
-                        //   			           $output .= '' . $strnext;
-                        // 		        }
 
-                        // if ($data['images']) {
-                        // 	foreach ($data['images'] as $image) {
-                        // 		$output .=  $image['popup'] . $strnextinf;
-                        // 	}
-                        // }
                         $output .= $strclose . $strnl;
                     }
-                    //}
                 }
                 $this->response->addHeader('Content-Type: text/plain; charset=utf-8');
                 $this->response->setOutput($output);
             }
         }
-        // protected function getPath($parent_id, $current_path = '') {
-        // 	$category_info = $this->model_catalog_category->getCategory($parent_id);
-        //
-        // 	if ($category_info) {
-        // 		if (!$current_path) {
-        // 			$new_path = $category_info['category_id'];
-        // 		} else {
-        // 			$new_path = $category_info['category_id'] . '_' . $current_path;
-        // 		}
-        //
-        // 		$path = $this->getPath($category_info['parent_id'], $new_path);
-        //
-        // 		if ($path) {
-        // 			return $path;
-        // 		} else {
-        // 			return $new_path;
-        // 		}
-        // 	}
-        // }
-        // protected function clear($data) {
-        // 	foreach ($data as $key => $value) {
-        // 		$data[$key] = html_entity_decode($value, ENT_QUOTES, 'UTF-8');
-        // 		$data[$key] = strip_tags($data[$key]);
-        // 		$data[$key] = preg_replace(array('/(\s){1,100}/us', '/&nbsp;/', '/\r\n/', '/\n\r/', '/\n/'), array(' ', ' ', '', '', ''), $data[$key]);
-        // 		$data[$key] = trim($data[$key]);
-        // 	}
-        //
-        // 	return $data;
-        // }
     }
     ?>
