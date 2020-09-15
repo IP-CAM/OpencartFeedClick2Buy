@@ -2,17 +2,17 @@
 Opencart Feed extension - Click2Buy CSV
 ====================================================================
 Date      : 16. January 2016
-Author    : Peter Maier
-Email     : service@mig-media.com
+Author    : Keith Phelan, Peter Maier
+Email     :
 
-Demo      : http://demo.opencart.center
+Demo      :
 
-Official site : http://opencart.center
-Shop:           http://shop.opencart.center
+Official site :
+Shop:           
 
 
 This extension allows you to export the items from an OpenCart shop, to be listed on click2buy’s websites.
-click2buy is a product and price comparison service. 
+click2buy is a product and price comparison service.
 (business.click2buy.com www.click2buy.de, www.click2buy.at, www.click2buy.fr, www.click2buy.es, www.click2buy.it, www.click2buy.pl, www.click2buy.in, www.click2buy.co.uk)
 
 
