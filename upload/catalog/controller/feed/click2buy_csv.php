@@ -148,7 +148,7 @@
                         $output .= html_entity_decode($this->url->link('product/product', 'product_id=' . $product['product_id']), ENT_QUOTES, 'UTF-8') . $strnext;
                         //$output .= $product['description'] . $strnext;
                         //$output .= strip_tags(html_entity_decode($product['description'], ENT_QUOTES, 'UTF-8')) . $strnext;
-			$output .= trim(preg_replace(['/\s+/','/\|/'], ' ', $product['description'])). $strnext;
+			$output .= trim(preg_replace(['/\s+/','/\|/', '/\,/'], ' ', $product['description'])). $strnext;
                         $output .= html_entity_decode($product['manufacturer'], ENT_QUOTES, 'UTF-8') . $strnext;
 
                         $output .= $this->weight->format($product['weight'], $product['weight_class_id']) . $strnext;
