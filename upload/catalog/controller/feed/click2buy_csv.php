@@ -118,7 +118,7 @@
 
                         $output .= $product['product_id'] . $strnext;
                         $output .= $product['ean'] . $strnext;
-                        $output .= html_entity_decode($product['name'], ENT_QUOTES, 'UTF-8') . $strnext;
+                        $output .= html_entity_decode($this->cleanField($product['name']), ENT_QUOTES, 'UTF-8') . $strnext;
 
                         // Price
                         $output .= $this->currency->format($product['price'], '', '', false) . $strnext;
@@ -148,7 +148,7 @@
                         $output .= html_entity_decode($this->url->link('product/product', 'product_id=' . $product['product_id']), ENT_QUOTES, 'UTF-8') . $strnext;
                         //$output .= $product['description'] . $strnext;
                         //$output .= strip_tags(html_entity_decode($product['description'], ENT_QUOTES, 'UTF-8')) . $strnext;
-			$output .= trim(preg_replace(['/\s+/','/\|/', '/\,/'], ' ', $product['description'])). $strnext;
+                        $output .= $this->cleanField($product['description']). $strnext;
                         $output .= html_entity_decode($product['manufacturer'], ENT_QUOTES, 'UTF-8') . $strnext;
 
                         $output .= $this->weight->format($product['weight'], $product['weight_class_id']) . $strnext;
@@ -166,6 +166,11 @@
                 $this->response->addHeader('Content-Type: text/plain; charset=utf-8');
                 $this->response->setOutput($output);
             }
+        }
+
+        private function cleanField($input)
+        {
+            return trim(preg_replace(['/\s+/','/\|/','/\,/'], [' ','',''], $input));
         }
     }
     ?>
