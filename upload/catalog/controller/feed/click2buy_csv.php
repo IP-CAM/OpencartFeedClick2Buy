@@ -48,7 +48,7 @@
                     $output .= $this->config->get('config_telephone') . $strnext;
                     $output .= $strclose . $strnl;
 
-                    $this->response->addHeader('Content-Type: text/plain; charset=utf-8');
+                    $this->response->addHeader('Content-Type: text/csv; charset=utf-8');
                     $this->response->setOutput($output);
                 }
             }
@@ -163,7 +163,8 @@
                         $output .= $strclose . $strnl;
                     }
                 }
-                $this->response->addHeader('Content-Type: text/plain; charset=utf-8');
+                $this->response->addHeader('Content-Type: text/csv; charset=utf-8');
+                $this->response->addHeader("Content-Disposition: attachment; filename=click2buy.csv");
                 $this->response->setOutput($output);
             }
         }
