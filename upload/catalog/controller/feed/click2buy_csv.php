@@ -1,4 +1,4 @@
-	<?php
+<?php
     class ControllerFeedClick2BuyCSV extends Controller
     {
         public function store()
